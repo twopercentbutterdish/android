@@ -1,28 +1,37 @@
 package com.example.myfirstapp;
 
 import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
 import java.util.Map;
+import java.util.Queue;
 
 public class Listing {
     /**
      * Representation of {@code this}.
      */
-    private Map.Entry<String, List<Double>> game;
+    private Map.Entry<String, Queue<Copy>> game;
     /**
-     * Required list size.
+     *  Listing's price
      */
-    private final int INITIAL_CAPACITY = 2;
-    /*
+    private double price;
+    /**
+     *  Copies sold.
+     */
+    private int sold;
+    /**
      * Constructor.
      */
-    public Listing(String name, double copyCount, double price){
-        List stats = new ArrayList(INITIAL_CAPACITY);
-        stats.add(0, copyCount);
-        stats.add(1, price);
-        game = new AbstractMap.SimpleEntry(name, stats);
+    public Listing(String name, double cost){
+        price = cost;
+        Queue<Copy> copies = new ArrayDeque<>();
+        game = new AbstractMap.SimpleEntry(name, copies);
     }
-//
-
+    /*
+     * Methods.
+     */
+    // TO_DO
+    // Add copy
+    // Get quantity.
+    // Change price.
+    // Increment sold.
 }

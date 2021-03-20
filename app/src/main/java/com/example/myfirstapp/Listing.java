@@ -23,6 +23,6 @@ public class Listing {
         stats.add(1, price);
         game = new AbstractMap.SimpleEntry(name, stats);
     }
-
+//
 
 }

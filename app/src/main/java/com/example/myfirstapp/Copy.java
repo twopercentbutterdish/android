@@ -6,45 +6,42 @@ import androidx.room.PrimaryKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-@Entity
+
+@Entity(tableName = "copies")
 public class Copy {
+    @PrimaryKey(autoGenerate = true)
+    private long copyId;
     /**
-     *  Field representing copy's completeness.
+     * Field representing copy's completeness.
      */
     @ColumnInfo(name = "complete")
     private boolean complete;
     /**
-     *  Time stamp of copy's creation.
+     * Time stamp of copy's creation.
      */
-    @PrimaryKey
-    private final Calendar creation;
+    @ColumnInfo(name = "dateCreation")
+    private long creation;
     /**
-     *  Time stamp of copy's purchase.
+     * Time stamp of copy's purchase.
      */
-    @ColumnInfo(name = "purchase")
-    private Calendar purchase;
+    @ColumnInfo(name = "datePurchase")
+    private long purchase;
     /**
-     *  String establishing correspondence between listing and #this copy.
+     * String establishing correspondence between listing and #this copy.
      */
     @ColumnInfo(name = "parentListing")
     private String listingName;
     /**
-     *  Amount of time copy spent as listed.
-     */
-    @ColumnInfo(name = "lifespan")
-    private String lifespan;
-    /**
-     *  Listing's price
+     * Listing's price
      */
     @ColumnInfo(name = "price")
     private double price;
+
+
     /**
      * Constructor.
      */
-    public Copy(double cost, boolean completeness){
-        this.price = cost;
-        this.complete = completeness;
-        this.creation = Calendar.getInstance();
+    public Copy(double cost, boolean complete, String parentListing) {
     }
 
     //--------------------------------------------------------------------------------------------//
@@ -53,54 +50,52 @@ public class Copy {
      */
     //--------------------------------------------------------------------------------------------//
 
-    /**
-     * DOC
-     */
-    public boolean isComplete(){
-        return this.complete;
+    public long getCopyId() {
+        return copyId;
     }
-    /**
-     * DOC
-     */
-    public void changeComplete(){
-        this.complete = !this.complete;
+
+    public void setCopyId(long copyId) {
+        this.copyId = copyId;
     }
-    /**
-     * DOC
-     */
-    public void markAsSold(){
-        this.purchase = Calendar.getInstance();
-        this.lifespan = createLifeSpan(this.creation, this.purchase);
+
+    public boolean isComplete() {
+        return complete;
     }
-    /**
-     * DOC
-     */
-    public void changePrice(double newPrice){
-        this.price = newPrice;
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
-    /**
-     * DOC
-     */
-    public double getPrice(){
-        return this.price;
+
+    public long getCreation() {
+        return creation;
     }
-    /**
-     * DOC
-     */
-    public String getCreation() {
-        return getDate(this.creation);
+
+    public void setCreation(long creation) {
+        this.creation = creation;
     }
-    /**
-     * DOC
-     */
-    public String getPurchase(){
-        return getDate(this.purchase);
+
+    public long getPurchase() {
+        return purchase;
     }
-    /**
-     * DOC
-     */
-    public String getLifeSpan(){
-        return this.lifespan;
+
+    public void setPurchase(long purchase) {
+        this.purchase = purchase;
+    }
+
+    public String getListingName() {
+        return listingName;
+    }
+
+    public void setListingName(String listingName) {
+        this.listingName = listingName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     //--------------------------------------------------------------------------------------------//
@@ -108,20 +103,5 @@ public class Copy {
      * Helper methods.
      */
     //--------------------------------------------------------------------------------------------//
-
-    /**
-     * DOC
-     */
-    public String createLifeSpan(Calendar start, Calendar finish){
-        return getDate(start) + " - " + getDate(finish);
-    }
-    /**
-     * DOC
-     */
-    public String getDate(Calendar time){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        return formatter.format(time.getTime());
-    }
 }
-
 

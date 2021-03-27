@@ -1,28 +1,42 @@
 package com.example.myfirstapp;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+@Entity
 public class Copy {
     /**
      *  Field representing copy's completeness.
      */
+    @ColumnInfo(name = "complete")
     private boolean complete;
     /**
      *  Time stamp of copy's creation.
      */
+    @PrimaryKey
     private final Calendar creation;
     /**
      *  Time stamp of copy's purchase.
      */
+    @ColumnInfo(name = "purchase")
     private Calendar purchase;
+    /**
+     *  String establishing correspondence between listing and #this copy.
+     */
+    @ColumnInfo(name = "parentListing")
+    private String listingName;
     /**
      *  Amount of time copy spent as listed.
      */
+    @ColumnInfo(name = "lifespan")
     private String lifespan;
     /**
      *  Listing's price
      */
+    @ColumnInfo(name = "price")
     private double price;
     /**
      * Constructor.
